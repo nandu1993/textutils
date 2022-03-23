@@ -40,7 +40,7 @@ function App() {
       showAlert("Light mode enabled", "success")
     }
   }
-//test
+
   return (
     <>
       <Router>
