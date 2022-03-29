@@ -13,7 +13,7 @@ export default function TextForm(props) {
 
     const txtAreaStyle={
         color:mode==="dark"?"white":"black",
-        backgroundColor:mode==="dark"?"grey":"white"
+        backgroundColor:mode==="dark"?"#010f22":"white"
     }
 
     const handleUpClick = () => {
@@ -46,8 +46,7 @@ export default function TextForm(props) {
     }
 
     const countOperations = (nText) => {
-        //0 word if there is only 1 space. ealrier only space also count as word
-        let wCount = nText.replace(/\s/g, '').length;
+        let wCount = nText.split(/\s+/).filter((e)=>{return e.length !==0}).length
 
         setCharLength(nText.length);
         setWordCount(wCount)
@@ -55,7 +54,7 @@ export default function TextForm(props) {
     }
 
     const countMins = (nText) => {
-        let totalTime = 0.008 * nText.split(" ").length;
+        let totalTime = 0.008 * nText.split(/\s+/).filter((e)=>{return e.length !==0}).length;
         return totalTime;
     }
 
@@ -66,10 +65,10 @@ export default function TextForm(props) {
                 <div className="mb-3">
                     <textarea className="form-control" value={text} onChange={handleOnChange} style={txtAreaStyle} id="myBox" rows="8"></textarea>
                 </div>
-                <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert to Uppercase</button>
-                <button className="btn btn-primary mx-1" onClick={handleLowClick}>Convert to Lowercase</button>
-                <button className="btn btn-primary mx-1" onClick={handleClearClick}>Clear Text</button>
-                <button className="btn btn-primary mx-1" onClick={handleCopyClick}>Copy Text</button>
+                <button disabled={text.length ===0} className="btn btn-primary mx-1 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+                <button disabled={text.length ===0} className="btn btn-primary mx-1 my-1" onClick={handleLowClick}>Convert to Lowercase</button>
+                <button disabled={text.length ===0} className="btn btn-primary mx-1 my-1" onClick={handleClearClick}>Clear Text</button>
+                <button disabled={text.length ===0} className="btn btn-primary mx-1 my-1" onClick={handleCopyClick}>Copy Text</button>
             </div>
             <div className="container my-2" style={fontColorStyle}>
                 <h2>Text Summery</h2>
